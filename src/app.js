@@ -1,7 +1,6 @@
 import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
-import mongoSanitize from "express-mongo-sanitize";
 import {xss} from "express-xss-sanitizer";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
@@ -18,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(helmet());
-app.use(mongoSanitize());
 app.use(xss());
 app.use(compression());
 
@@ -76,16 +74,18 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Welcome to Expenzo API");
+  res.send("Welcome to Expenzo API");
 });
 
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 import transactionRoutes from "./routes/transaction.route.js";
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 
 app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)
 app.use("/api/transaction", transactionRoutes)
 
+app.use(errorHandler)
 export { app };

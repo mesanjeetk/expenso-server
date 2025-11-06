@@ -272,7 +272,8 @@ const getTransaction = asyncHandler(async (req, res) => {
   const tx = await Transaction.findById(id)
     .populate("payer", "name email")
     .populate("createdBy", "name email")
-    .populate("reimbursements.user", "name email");
+    .populate("reimbursements.user", "name email")
+    .lean();
 
   if (!tx) throw new ApiError(404, "Transaction not found");
 

@@ -1,9 +1,9 @@
 import { resend } from "./resend.js";
-import { houseHoldInvitesTemplate, welcomeTemplate } from "./templates.js";
+import { houseHoldInvitesTemplate, welcomeTemplates } from "./templates.js";
 
 const sendWelcomeEmail = async ({ to, name, verifyLink }) => {
   
-  let html = welcomeTemplate
+  let html = welcomeTemplates
     .replace("{{name}}", name)
     .replace("{{verifyLink}}", verifyLink);
 

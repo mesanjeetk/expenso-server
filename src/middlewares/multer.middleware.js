@@ -6,8 +6,8 @@ const storage = multer.diskStorage({
     cb(null, "./public/temp");
   },
   filename(req, file, cb) {
-    const ext = file.originalname.split(".").pop(); // get extension
-    cb(null, `${uuid()}.${ext}`); // unique filename
+    const ext = file.originalname.split(".").pop();
+    cb(null, `${uuid()}.${ext}`);
   }
 });
 
