@@ -18,5 +18,8 @@ const HouseholdSchema = new mongoose.Schema({
   timezone: { type: String, default: 'Asia/Kolkata' },
 }, { timestamps: true });
 
+HouseholdSchema.index({ primaryHolder: 1 });
+HouseholdSchema.index({ "members.user": 1 }); // helps when checking membership or listing households by user
+HouseholdSchema.index({ "pendingInvites.user": 1 }); // quick lookup of invites for a user
 
 export const Household = mongoose.model('Household', HouseholdSchema);

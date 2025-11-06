@@ -38,6 +38,14 @@ const TransactionSchema = new mongoose.Schema({
 // helpful indexes
 TransactionSchema.index({ household: 1, date: -1 });
 TransactionSchema.index({ 'reimbursements.user': 1, 'reimbursements.received': 1 });
+TransactionSchema.index({ payer: 1 }); // query by payer (filter=mine)
+TransactionSchema.index({ createdBy: 1 }); // who created transactions
+TransactionSchema.index({ category: 1 }); // category filtering
+TransactionSchema.index({ isRecurring: 1 }); // recurring lookups
+TransactionSchema.index({ createdAt: -1 }); // recent transactions
+
+// Text index for search on category + note (useful for search feature)
+TransactionSchema.index({ note: 'text', category: 'text' }, { default_language: "english" });
 TransactionSchema.plugin(aggregatePaginate);
 
 export const Transaction = mongoose.model('Transaction', TransactionSchema);

@@ -18,6 +18,12 @@ const UserSchema = new mongoose.Schema({
   timestamps: true
 });
 
+// Indexes
+UserSchema.index({ households: 1 }); // find users by household quickly (if needed)
+UserSchema.index({ defaultHousehold: 1 });
+UserSchema.index({ emailVerificationToken: 1 }, { sparse: true }); // quick lookup when verifying email
+
+
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
