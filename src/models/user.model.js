@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String },
   avatar: { type: String },
   households: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Household' }],
+  emailVerified: { type: Boolean, default: false },
+  emailVerificationToken: { type: String, default: null },
+  emailVerificationExpires: { type: Date, default: null }, 
+  defaultHousehold: { type: mongoose.Schema.Types.ObjectId, ref: "Household" }
 }, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true },

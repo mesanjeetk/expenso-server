@@ -13,7 +13,7 @@ const ReimbursementSchema = new mongoose.Schema({
 
 const AttachmentSchema = new mongoose.Schema({
   url: { type: String, required: true },
-  filename: { type: String },
+  public_id: { type: String, required: true },
   uploadedAt: { type: Date, default: Date.now }
 }, { _id: false });
 
